@@ -965,6 +965,12 @@ a {
   gap: 28px;
 }
 
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
 .testimonial-card {
   background-color: var(--bg-white);
   border: 1px solid var(--border-light);
@@ -1380,7 +1386,7 @@ a {
     font-size: 1.8rem;
   }
   
-  .problem-grid, .secrets-grid, .bonuses-grid, .testimonials-grid {
+  .problem-grid, .secrets-grid, .bonuses-grid, .testimonials-grid, .reviews-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
