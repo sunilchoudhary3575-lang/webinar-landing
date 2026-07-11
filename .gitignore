@@ -4,4 +4,6 @@ dist/
 *.log
 target_mirror.html
 target_homepage.html
+target_bawra_home.html
+target_bawra_js.js
 *.local
