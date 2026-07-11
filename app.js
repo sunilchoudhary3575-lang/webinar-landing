@@ -3,35 +3,40 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // 1. Countdown Timer (Weekly Rollover Monday 7:30 PM)
+  // 1. Countdown Timer (Target Sunday, July 19th, 2026 7:30 PM with Sunday Rollover)
   // ==========================================
-  function getNextMonday730PM() {
+  function getWebinarTargetTime() {
     const now = new Date();
-    const resultDate = new Date();
+    // Primary Target: Sunday, July 19th, 2026, 7:30 PM IST (UTC+5:30)
+    const primaryTarget = new Date('2026-07-19T19:30:00+05:30');
     
-    // Find days until next Monday (Monday is day 1)
-    const currentDay = now.getDay();
-    let daysToMonday = 1 - currentDay;
-    if (daysToMonday <= 0) {
-      daysToMonday += 7; // It's Tuesday-Sunday or Monday, push to next Monday
+    if (now < primaryTarget) {
+      return primaryTarget.getTime();
     }
     
-    // If it's Monday today, check if it's before or after 7:30 PM
-    if (currentDay === 1) {
+    // Fallback: Rollover to the next upcoming Sunday at 7:30 PM IST
+    const resultDate = new Date();
+    const currentDay = now.getDay(); // Sunday = 0
+    let daysToSunday = 0 - currentDay;
+    if (daysToSunday <= 0) {
+      daysToSunday += 7; // Push to next Sunday
+    }
+    
+    // Check if today is Sunday and it is before 7:30 PM
+    if (currentDay === 0) {
       const today730PM = new Date();
       today730PM.setHours(19, 30, 0, 0);
       if (now < today730PM) {
-        daysToMonday = 0; // Today is the day
+        daysToSunday = 0;
       }
     }
     
-    resultDate.setDate(now.getDate() + daysToMonday);
+    resultDate.setDate(now.getDate() + daysToSunday);
     resultDate.setHours(19, 30, 0, 0);
-    
     return resultDate.getTime();
   }
 
-  const targetTime = getNextMonday730PM();
+  const targetTime = getWebinarTargetTime();
   const timerElements = {
     days: document.getElementById('days'),
     hours: document.getElementById('hours'),
