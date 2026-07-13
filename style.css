@@ -203,6 +203,12 @@ a {
   letter-spacing: -0.5px;
 }
 
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
 .nav-cta {
   padding: 8px 18px;
   font-size: 0.85rem;
@@ -399,6 +405,7 @@ a {
 .fee-highlight {
   color: var(--emerald-600);
   font-weight: 800;
+  justify-content: center;
 }
 
 .hero-actions {
