@@ -284,4 +284,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================
+  // 6. Lazy-load YouTube Video on Preview Click
+  // ==========================================
+  const videoContainer = document.getElementById('video-preview-container');
+  if (videoContainer) {
+    videoContainer.addEventListener('click', () => {
+      videoContainer.innerHTML = `
+        <iframe 
+          width="100%" 
+          src="https://www.youtube.com/embed/r1wLgq5U0kg?autoplay=1&rel=0" 
+          title="Webinar Live Video Masterclass" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="aspect-ratio: 16/9; display: block; width: 100%; border: none;"
+        ></iframe>
+      `;
+      // Remove pointer cursor and custom styling
+      videoContainer.style.cursor = 'default';
+    });
+  }
+
 });
