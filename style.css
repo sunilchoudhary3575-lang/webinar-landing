@@ -788,37 +788,35 @@ a {
 
 /* Target Audience */
 .audience-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  max-width: 1000px;
+  max-width: 680px;
   margin: 0 auto;
 }
 
 .audience-card {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: var(--bg-light);
-  border: 1px solid var(--border-light);
-  padding: 16px 20px;
-  border-radius: var(--border-radius-sm);
+  align-items: flex-start;
+  gap: 14px;
   text-align: left;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 500;
   color: var(--text-slate);
-  transition: background-color 0.2s, border-color 0.2s;
+  padding: 4px 0;
 }
 
-.audience-card:hover {
-  background-color: var(--bg-white);
-  border-color: var(--border-color);
-}
-
-.check-icon {
-  color: var(--rose-600);
-  font-weight: 800;
-  font-size: 1.1rem;
+.check-box-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6366f1; /* Purple/indigo background */
+  color: #ffffff;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 /* Warning Filter Section Styles */
@@ -1334,6 +1332,58 @@ a {
   animation: pulse-ring 2s infinite;
 }
 
+/* What You'll Learn Section */
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.learn-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius-sm);
+  padding: 24px;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+
+.learn-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color);
+}
+
+.learn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  background-color: var(--bg-light);
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.learn-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+.learn-info p {
+  font-size: 0.88rem;
+  color: var(--text-slate);
+  line-height: 1.5;
+}
+
 /* Responsive Breakpoints */
 @media (max-width: 1024px) {
   .hero-container {
@@ -1356,8 +1406,8 @@ a {
     margin-top: 20px;
   }
   
-  .audience-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .learn-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .coach-layout {
@@ -1393,14 +1443,12 @@ a {
     font-size: 1.8rem;
   }
   
-  .problem-grid, .secrets-grid, .bonuses-grid, .testimonials-grid, .reviews-grid {
+  .problem-grid, .secrets-grid, .bonuses-grid, .testimonials-grid, .reviews-grid, .learn-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
   
-  .audience-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+
   
   .trust-container {
     flex-direction: column;
@@ -1430,9 +1478,7 @@ a {
 }
 
 @media (max-width: 480px) {
-  .audience-grid {
-    grid-template-columns: 1fr;
-  }
+
   
   .event-details-grid {
     grid-template-columns: 1fr;
