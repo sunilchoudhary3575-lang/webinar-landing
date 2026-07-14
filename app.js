@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       videoContainer.innerHTML = `
         <iframe 
           width="100%" 
-          src="https://www.youtube.com/embed/r1wLgq5U0kg?autoplay=1&rel=0" 
+          src="https://www.youtube.com/embed/iF9Dg6EvQ5g?autoplay=1&rel=0" 
           title="Webinar Live Video Masterclass" 
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
