@@ -277,9 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Registration details successfully captured:', formData);
 
-        // Hide form and display success panel
-        regForm.classList.add('hidden');
-        successState.classList.remove('hidden');
+        // Redirect to the thank you page
+        window.location.href = '/thankyou.html';
       }
     });
   }
