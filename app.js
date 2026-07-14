@@ -3,18 +3,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // 1. Countdown Timer (Target Sunday, July 19th, 2026 7:30 PM with Sunday Rollover)
+  // 1. Countdown Timer (Target Sunday, July 26th, 2026 4:00 PM with Sunday Rollover)
   // ==========================================
   function getWebinarTargetTime() {
     const now = new Date();
-    // Primary Target: Sunday, July 19th, 2026, 7:30 PM IST (UTC+5:30)
-    const primaryTarget = new Date('2026-07-19T19:30:00+05:30');
+    // Primary Target: Sunday, July 26th, 2026, 4:00 PM IST (UTC+5:30)
+    const primaryTarget = new Date('2026-07-26T16:00:00+05:30');
     
     if (now < primaryTarget) {
       return primaryTarget.getTime();
     }
     
-    // Fallback: Rollover to the next upcoming Sunday at 7:30 PM IST
+    // Fallback: Rollover to the next upcoming Sunday at 4:00 PM IST
     const resultDate = new Date();
     const currentDay = now.getDay(); // Sunday = 0
     let daysToSunday = 0 - currentDay;
@@ -22,17 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
       daysToSunday += 7; // Push to next Sunday
     }
     
-    // Check if today is Sunday and it is before 7:30 PM
+    // Check if today is Sunday and it is before 4:00 PM
     if (currentDay === 0) {
-      const today730PM = new Date();
-      today730PM.setHours(19, 30, 0, 0);
-      if (now < today730PM) {
+      const today4PM = new Date();
+      today4PM.setHours(16, 0, 0, 0);
+      if (now < today4PM) {
         daysToSunday = 0;
       }
     }
     
     resultDate.setDate(now.getDate() + daysToSunday);
-    resultDate.setHours(19, 30, 0, 0);
+    resultDate.setHours(16, 0, 0, 0);
     return resultDate.getTime();
   }
 
