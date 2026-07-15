@@ -900,28 +900,28 @@
       </div>
 
       <!-- Registration Form -->
-      <form id="registration-form" class="modal-form">
+      <form id="registration-form" name="submit-to-google-sheet" class="modal-form">
         <div class="form-group">
           <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" placeholder="Dr. Rajesh Sharma" required>
+          <input type="text" id="fullName" name="Name" placeholder="Dr. Rajesh Sharma" required>
           <span class="error-msg" id="name-error"></span>
         </div>
 
         <div class="form-group">
           <label for="mobile">Mobile Number (WhatsApp)</label>
-          <input type="tel" id="mobile" placeholder="9876543210" required>
+          <input type="tel" id="mobile" name="Mobile No." placeholder="9876543210" required>
           <span class="error-msg" id="mobile-error"></span>
         </div>
 
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="rajesh@sharmaclinic.com" required>
+          <input type="email" id="email" name="Email" placeholder="rajesh@sharmaclinic.com" required>
           <span class="error-msg" id="email-error"></span>
         </div>
 
         <div class="form-group">
           <label for="specialty">Your Specialty</label>
-          <select id="specialty" required>
+          <select id="specialty" name="Your Specialty" required>
             <option value="" disabled selected>Select your medical specialty</option>
             <option value="General Physician">General Physician</option>
             <option value="Dentist">Dentist</option>
@@ -939,7 +939,7 @@
 
         <div class="form-group">
           <label for="clinicName">Clinic or Hospital Name</label>
-          <input type="text" id="clinicName" placeholder="Sharma Multispeciality Clinic" required>
+          <input type="text" id="clinicName" name="Hospital Name" placeholder="Sharma Multispeciality Clinic" required>
           <span class="error-msg" id="clinic-error"></span>
         </div>
 

@@ -256,6 +256,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return isValid;
   }
 
+  // Google Apps Script Web App URL configuration
+  // Replace this placeholder with the actual Web App URL from your Google Sheets deployment.
+  const GOOGLE_SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzj6XckzRAPL34xnZLZVFWg6OGajWGjhaRE49DNnIVsvTAvScm0dsP7rNCezW2ZOihYVw/exec';
+
   if (regForm) {
     regForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -277,20 +281,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Registration details successfully captured:', formData);
 
-        // Format WhatsApp message with details
-        const whatsappMessage = `*New Free Registration Details*
-----------------------------------------
-*Full Name:* ${formData.name}
-*Mobile Number:* ${formData.mobile}
-*Email Address:* ${formData.email}
-*Specialty:* ${formData.specialty}
-*Clinic/Hospital Name:* ${formData.clinicName}`;
+        // Disable submit button and show loading state
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Registering...';
+        }
 
-        const encodedMessage = encodeURIComponent(whatsappMessage);
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=916377790409&text=${encodedMessage}`;
+        // Send data to Google Sheet if the URL is configured
+        if (GOOGLE_SHEET_SCRIPT_URL && GOOGLE_SHEET_SCRIPT_URL !== 'YOUR_GOOGLE_SHEET_WEB_APP_URL_HERE') {
+          const submissionData = new FormData(regForm);
+          
+          // Append multiple variations of keys to ensure compatibility with case-sensitive Apps Scripts
+          const rawName = inputs.fullName.value.trim();
+          submissionData.set('Name', rawName);
+          submissionData.set('name', rawName);
+          submissionData.set('fullName', rawName);
+          submissionData.set('Full Name', rawName);
+          
+          const rawMobile = inputs.mobile.value.trim();
+          submissionData.set('Mobile No.', rawMobile);
+          submissionData.set('mobile', rawMobile);
+          submissionData.set('phone', rawMobile);
+          submissionData.set('Phone', rawMobile);
+          submissionData.set('Mobile', rawMobile);
+          
+          const rawEmail = inputs.email.value.trim();
+          submissionData.set('Email', rawEmail);
+          submissionData.set('email', rawEmail);
+          submissionData.set('Email Address', rawEmail);
+          
+          const rawSpecialty = inputs.specialty.value;
+          submissionData.set('Your Specialty', rawSpecialty);
+          submissionData.set('specialty', rawSpecialty);
+          submissionData.set('Specialty', rawSpecialty);
+          
+          const rawClinic = inputs.clinicName.value.trim();
+          submissionData.set('Hospital Name', rawClinic);
+          submissionData.set('clinicName', rawClinic);
+          submissionData.set('Clinic Name', rawClinic);
+          submissionData.set('hospitalName', rawClinic);
 
-        // Redirect directly to WhatsApp
-        window.location.href = whatsappUrl;
+          fetch(GOOGLE_SHEET_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Avoids CORS issues with Google Apps Script redirects
+            body: submissionData
+          })
+          .then(() => {
+            console.log('Data successfully sent to Google Sheet.');
+            window.location.href = 'thankyou.html';
+          })
+          .catch((error) => {
+            console.error('Error sending data to Google Sheet:', error);
+            // Redirect anyway to ensure the user is not stuck on a network error
+            window.location.href = 'thankyou.html';
+          });
+        } else {
+          console.warn('Google Sheet URL is not configured. Redirecting to thank you page.');
+          // Redirect immediately since URL is not configured yet
+          window.location.href = 'thankyou.html';
+        }
       }
     });
   }
