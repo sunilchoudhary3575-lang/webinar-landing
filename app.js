@@ -277,8 +277,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Registration details successfully captured:', formData);
 
-        // Redirect to the thank you page
-        window.location.href = '/thankyou.html';
+        // Format WhatsApp message with details
+        const whatsappMessage = `*New Free Registration Details*
+----------------------------------------
+*Full Name:* ${formData.name}
+*Mobile Number:* ${formData.mobile}
+*Email Address:* ${formData.email}
+*Specialty:* ${formData.specialty}
+*Clinic/Hospital Name:* ${formData.clinicName}`;
+
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=916377790409&text=${encodedMessage}`;
+
+        // Redirect directly to WhatsApp
+        window.location.href = whatsappUrl;
       }
     });
   }
