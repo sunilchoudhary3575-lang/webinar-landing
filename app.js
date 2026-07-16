@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mobile: document.getElementById('mobile'),
     email: document.getElementById('email'),
     specialty: document.getElementById('specialty'),
-    clinicName: document.getElementById('clinicName')
+    clinicName: document.getElementById('clinicName'),
+    city: document.getElementById('city')
   };
 
   const errors = {
@@ -187,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mobile: document.getElementById('mobile-error'),
     email: document.getElementById('email-error'),
     specialty: document.getElementById('specialty-error'),
-    clinicName: document.getElementById('clinic-error')
+    clinicName: document.getElementById('clinic-error'),
+    city: document.getElementById('city-error')
   };
 
   function clearFormErrors() {
@@ -253,6 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
       isValid = false;
     }
 
+    // 6. City check
+    if (!inputs.city.value.trim()) {
+      errors.city.textContent = 'City is required.';
+      inputs.city.classList.add('invalid');
+      isValid = false;
+    }
+
     return isValid;
   }
 
@@ -271,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
           email: inputs.email.value.trim(),
           specialty: inputs.specialty.value,
           clinicName: inputs.clinicName.value.trim(),
+          city: inputs.city.value.trim(),
           timestamp: new Date().toISOString()
         };
 
@@ -321,6 +331,10 @@ document.addEventListener('DOMContentLoaded', () => {
           submissionData.set('clinicName', rawClinic);
           submissionData.set('Clinic Name', rawClinic);
           submissionData.set('hospitalName', rawClinic);
+
+          const rawCity = inputs.city.value.trim();
+          submissionData.set('City', rawCity);
+          submissionData.set('city', rawCity);
 
           fetch(GOOGLE_SHEET_SCRIPT_URL, {
             method: 'POST',

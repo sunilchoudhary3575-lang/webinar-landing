@@ -15,6 +15,7 @@ Follow these steps to connect your registration form to a Google Sheet using you
    * **Column D:** `Email Address`
    * **Column E:** `Specialty`
    * **Column F:** `Clinic/Hospital Name`
+   * **Column G:** `City`
 
 ---
 
@@ -32,6 +33,7 @@ function doPost(e) {
   var email = "";
   var specialty = "";
   var clinicName = "";
+  var city = "";
   var timestamp = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
   
   try {
@@ -41,6 +43,7 @@ function doPost(e) {
     email = data.email || "";
     specialty = data.specialty || "";
     clinicName = data.clinicName || "";
+    city = data.city || "";
     if (data.timestamp) {
       timestamp = new Date(data.timestamp).toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
     }
@@ -50,9 +53,10 @@ function doPost(e) {
     email = e.parameter.email || "";
     specialty = e.parameter.specialty || "";
     clinicName = e.parameter.clinicName || "";
+    city = e.parameter.city || "";
   }
   
-  sheet.appendRow([timestamp, name, mobile, email, specialty, clinicName]);
+  sheet.appendRow([timestamp, name, mobile, email, specialty, clinicName, city]);
   
   return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
     .setMimeType(ContentService.MimeType.JSON)
